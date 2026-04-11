@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tst-ui-playground.gghgh.dev/sitemap-index.xml

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Nimbus Wireless Headphones illustration">
+  <rect width="1200" height="900" fill="#ecfeff" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#cffafe" />
+  <path d="M360 520c0-153 108-270 240-270s240 117 240 270" fill="none" stroke="#0f766e" stroke-width="52" stroke-linecap="round" />
+  <rect x="280" y="460" width="150" height="230" rx="68" fill="#134e4a" />
+  <rect x="770" y="460" width="150" height="230" rx="68" fill="#134e4a" />
+  <rect x="315" y="500" width="80" height="150" rx="36" fill="#5eead4" />
+  <rect x="805" y="500" width="80" height="150" rx="36" fill="#5eead4" />
+</svg>

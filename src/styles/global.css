@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+
+  --color-shopedia-50: #f0fdf6;
+  --color-shopedia-100: #dcfce8;
+  --color-shopedia-200: #bbf7d1;
+  --color-shopedia-300: #86efad;
+  --color-shopedia-400: #4ade80;
+  --color-shopedia-500: #16a34a;
+  --color-shopedia-600: #15803d;
+  --color-shopedia-700: #166534;
+  --color-shopedia-800: #14532d;
+  --color-shopedia-900: #0f3d22;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    background: #f8fafc;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: #f8fafc;
+    color: #0f172a;
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: #bbf7d1;
+    color: #14532d;
+  }
+}
+
+@layer utilities {
+  .page-shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-inline: 1rem;
+  }
+
+  .surface-panel {
+    border-radius: 1.5rem;
+    border: 1px solid rgb(226 232 240);
+    background: rgb(255 255 255 / 0.96);
+    box-shadow: 0 18px 48px -28px rgb(15 23 42 / 0.24);
+  }
+
+  .text-muted {
+    color: rgb(71 85 105);
+  }
+
+  @media (min-width: 640px) {
+    .page-shell {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-shell {
+      padding-inline: 2rem;
+    }
+  }
+}

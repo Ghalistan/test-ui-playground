@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Harbor Ceramic Tumbler illustration">
+  <rect width="1200" height="900" fill="#f7fee7" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#ecfccb" />
+  <rect x="470" y="230" width="260" height="420" rx="76" fill="#fafaf9" stroke="#84cc16" stroke-width="24" />
+  <rect x="445" y="200" width="310" height="70" rx="35" fill="#a3e635" />
+  <path d="M512 320h176v42H512Zm0 82h176v42H512Zm0 82h176v42H512Z" fill="#d9f99d" />
+  <ellipse cx="600" cy="688" rx="150" ry="32" fill="#84cc16" opacity="0.18" />
+</svg>

@@ -1,0 +1,43 @@
+{
+  "name": "test-ui-playground",
+  "type": "module",
+  "version": "1.0.0",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview --host",
+    "check": "astro check",
+    "check:biome": "biome check .",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "test:e2e": "playwright test",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/svelte": "^8.0.4",
+    "@tailwindcss/vite": "^4.2.2",
+    "astro": "^6.1.5",
+    "dexie": "^4.4.2",
+    "lucide-svelte": "0.577.0",
+    "msw": "^2.13.2",
+    "svelte": "^5.55.2",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.11",
+    "@playwright/test": "^1.59.1"
+  }
+}

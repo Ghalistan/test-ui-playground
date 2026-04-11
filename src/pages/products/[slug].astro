@@ -1,0 +1,58 @@
+---
+import ProductDetailView from '../../components/svelte/ProductDetailView.svelte';
+import StoreLayout from '../../layouts/StoreLayout.astro';
+import { getSeedProductBySlug, seedProducts } from '../../lib/db/seed';
+
+export function getStaticPaths() {
+  return seedProducts.map((product) => ({
+    params: { slug: product.slug },
+    props: { seedProduct: product },
+  }));
+}
+
+const { seedProduct } = Astro.props;
+const product = seedProduct ?? getSeedProductBySlug(Astro.params.slug ?? '');
+
+if (!product) {
+  throw new Error('Product not found.');
+}
+
+const title = `${product.name} | Shopedia`;
+const description = `${product.description} Shop this ${product.category.toLowerCase()} pick from ${product.seller} and continue through Shopedia's cart or instant-buy flows.`;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.name,
+  description: product.description,
+  image: new URL(product.imageUrl, Astro.site).toString(),
+  sku: product.id,
+  brand: {
+    '@type': 'Brand',
+    name: 'Shopedia',
+  },
+  offers: {
+    '@type': 'Offer',
+    availability:
+      product.stock > 0
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock',
+    priceCurrency: product.currency,
+    price: product.price,
+    url: new URL(Astro.url.pathname, Astro.site).toString(),
+  },
+};
+---
+
+<StoreLayout title={title} description={description} image={product.imageUrl} structuredData={structuredData}>
+  <main class="page-shell py-8 sm:py-10">
+    <nav class="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500" aria-label="Breadcrumb">
+      <a href="/" class="transition hover:text-shopedia-700">Home</a>
+      <span>/</span>
+      <span>{product.category}</span>
+      <span>/</span>
+      <span class="font-medium text-slate-900">{product.name}</span>
+    </nav>
+
+    <ProductDetailView client:load initialProduct={product} />
+  </main>
+</StoreLayout>

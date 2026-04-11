@@ -1,0 +1,14 @@
+---
+import SearchResultsView from '../components/svelte/SearchResultsView.svelte';
+import StoreLayout from '../layouts/StoreLayout.astro';
+---
+
+<StoreLayout
+  title="Search | Shopedia"
+  description="Search Shopedia products and shops, then narrow matching results by price."
+  noindex
+>
+  <main class="page-shell py-8 sm:py-10">
+    <SearchResultsView client:load />
+  </main>
+</StoreLayout>

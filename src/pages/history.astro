@@ -1,0 +1,20 @@
+---
+import OrderHistory from '../components/svelte/OrderHistory.svelte';
+import StoreLayout from '../layouts/StoreLayout.astro';
+
+const highlightOrderId = Astro.url.searchParams.get('highlight') ?? '';
+---
+
+<StoreLayout
+  title="Purchase History | Shopedia"
+  description="Review saved Shopedia orders and the locally stored cash checkout history."
+  noindex
+>
+  <main class="page-shell py-8 sm:py-10">
+    <div class="mb-6 space-y-2">
+      <p class="text-xs uppercase tracking-[0.24em] text-slate-400">History</p>
+      <h1 class="text-3xl font-black tracking-tight text-slate-950">Purchase history</h1>
+    </div>
+    <OrderHistory client:load highlightOrderId={highlightOrderId} />
+  </main>
+</StoreLayout>

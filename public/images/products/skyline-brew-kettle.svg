@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Skyline Brew Kettle illustration">
+  <rect width="1200" height="900" fill="#fff7ed" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#ffedd5" />
+  <path d="M430 260h250c130 0 205 77 205 190 0 109-77 215-220 215H485c-108 0-185-72-185-175 0-126 87-230 130-230Z" fill="#fb923c" />
+  <path d="M790 362c83 2 142 52 142 124 0 64-47 112-126 126" fill="none" stroke="#9a3412" stroke-width="42" stroke-linecap="round" />
+  <path d="M620 224c0-41 30-74 68-74 42 0 74 32 74 74" fill="none" stroke="#7c2d12" stroke-width="26" stroke-linecap="round" />
+  <rect x="470" y="620" width="260" height="52" rx="26" fill="#7c2d12" opacity="0.18" />
+</svg>

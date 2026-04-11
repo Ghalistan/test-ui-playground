@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Mistline Aroma Diffuser illustration">
+  <rect width="1200" height="900" fill="#f0f9ff" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#dbeafe" />
+  <path d="M600 210c0-38 23-70 52-70 27 0 46 22 46 50 0 20-9 39-24 55" fill="none" stroke="#7dd3fc" stroke-width="24" stroke-linecap="round" />
+  <path d="M540 290h120c78 0 136 53 136 132v118c0 86-66 146-156 146H560c-90 0-156-60-156-146V422c0-79 58-132 136-132Z" fill="#e2e8f0" />
+  <path d="M472 350h256c38 0 68 30 68 68v128c0 63-48 110-114 110H518c-66 0-114-47-114-110V418c0-38 30-68 68-68Z" fill="#94a3b8" />
+  <ellipse cx="600" cy="428" rx="102" ry="46" fill="#e0f2fe" />
+  <rect x="470" y="646" width="260" height="48" rx="24" fill="#0f172a" opacity="0.12" />
+</svg>

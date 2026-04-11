@@ -1,0 +1,38 @@
+---
+const promos = [
+  {
+    title: 'Fresh picks, fast mock flows',
+    body: 'Shopedia keeps the storefront static and quick while the cart, auth, and order actions run through browser-routed API mocks.',
+    tags: ['IndexedDB seeded', 'MSW routed API', 'Mobile-ready shell'],
+  },
+  {
+    title: 'Daily marketplace highlight',
+    body: 'Use the seeded customer or create a new one with OTP verification to walk through the entire cash checkout journey.',
+    tags: ['OTP demo', 'Persistent sessions', 'Reset anytime'],
+  },
+  {
+    title: 'Built for repeat automation runs',
+    body: 'The catalog stays deterministic, the data stays local, and the app can be reset to a known state from settings.',
+    tags: ['Stable selectors', 'Local assets', 'Danger zone reset'],
+  },
+];
+
+const promo = promos[0];
+---
+
+<section class="surface-panel flex h-full flex-col gap-4 p-6">
+  <span class="inline-flex w-fit rounded-full bg-shopedia-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-shopedia-700">
+    Storefront brief
+  </span>
+  <div class="space-y-2">
+    <h2 class="text-2xl font-black tracking-tight text-slate-950">{promo.title}</h2>
+    <p class="text-sm leading-6 text-slate-600">{promo.body}</p>
+  </div>
+  <div class="mt-auto flex flex-wrap gap-2">
+    {promo.tags.map((tag) => (
+      <span class="rounded-full border border-shopedia-100 bg-white px-3 py-1 text-xs font-medium text-shopedia-700">
+        {tag}
+      </span>
+    ))}
+  </div>
+</section>

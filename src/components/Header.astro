@@ -1,0 +1,94 @@
+---
+import HeaderActions from './svelte/HeaderActions.svelte';
+
+interface Props {
+  searchQuery?: string;
+  currentPath: string;
+}
+
+const { searchQuery = '', currentPath } = Astro.props;
+const hasSearchQuery = searchQuery.trim().length > 0;
+---
+
+<header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
+  <div class="page-shell py-3">
+    <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-5">
+      <a
+        href="/"
+        class="flex min-w-0 items-center gap-3 rounded-2xl px-1 py-1 transition hover:bg-shopedia-50"
+        data-testid="site-logo"
+      >
+        <img src="/images/branding/shopedia-mark.svg" alt="Shopedia logo" class="h-11 w-11 rounded-2xl" />
+        <div class="min-w-0">
+          <p class="truncate text-base font-black tracking-tight text-slate-950 sm:text-lg">Shopedia</p>
+          <p class="truncate text-xs text-slate-500">Demo marketplace UI playground</p>
+        </div>
+      </a>
+
+      <div class="justify-self-end lg:order-3">
+        <HeaderActions client:load currentPath={currentPath} />
+      </div>
+
+      <form
+        action="/search"
+        method="GET"
+        class="col-span-2 flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-2 shadow-sm lg:order-2 lg:col-span-1"
+      >
+        <label class="sr-only" for="site-search">Search items or shops</label>
+        <input
+          id="site-search"
+          name="q"
+          type="search"
+          value={searchQuery}
+          placeholder="Search items or shops"
+          class="min-w-0 flex-1 rounded-xl border-0 bg-transparent px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400"
+          data-testid="site-search"
+        />
+        <button
+          type="submit"
+          class="rounded-xl bg-shopedia-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-shopedia-700 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:text-slate-500"
+          disabled={!hasSearchQuery}
+          data-search-submit
+        >
+          Search
+        </button>
+        <button
+          type="button"
+          class="rounded-xl px-3 py-2 text-sm font-semibold text-slate-500 transition hover:bg-slate-200 hover:text-slate-700"
+          hidden={!hasSearchQuery}
+          aria-label="Clear query"
+          data-testid="site-search-clear"
+          data-search-clear
+        >
+          ×
+        </button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<script>
+  const searchInput = document.querySelector('#site-search');
+  const searchSubmit = document.querySelector('[data-search-submit]');
+  const searchClear = document.querySelector('[data-search-clear]');
+
+  if (
+    searchInput instanceof HTMLInputElement &&
+    searchSubmit instanceof HTMLButtonElement &&
+    searchClear instanceof HTMLButtonElement
+  ) {
+    const syncSearchControls = () => {
+      const hasValue = searchInput.value.trim().length > 0;
+      searchSubmit.disabled = !hasValue;
+      searchClear.hidden = !hasValue;
+    };
+
+    syncSearchControls();
+    searchInput.addEventListener('input', syncSearchControls);
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      syncSearchControls();
+      searchInput.focus();
+    });
+  }
+</script>

@@ -1,0 +1,168 @@
+---
+import StoreLayout from '../layouts/StoreLayout.astro';
+
+const tabClasses =
+  'inline-flex rounded-full px-4 py-2 text-sm font-semibold transition';
+
+const libraryGroups = [
+  {
+    title: 'Framework',
+    description:
+      'Astro handles page rendering and shell structure, while Svelte powers the interactive islands.',
+    items: ['astro', '@astrojs/svelte', 'svelte'],
+  },
+  {
+    title: 'Styling',
+    description:
+      'Tailwind drives utility styling and shared storefront tokens across the app shell.',
+    items: ['tailwindcss', '@tailwindcss/vite'],
+  },
+  {
+    title: 'Data and mocking',
+    description:
+      'Dexie persists demo data in IndexedDB, and MSW provides browser-side API mocking for storefront flows.',
+    items: ['dexie', 'msw'],
+  },
+  {
+    title: 'UI',
+    description:
+      'Lucide provides the icon set used in cart actions, header controls, and toasts.',
+    items: ['lucide-svelte'],
+  },
+  {
+    title: 'Tooling',
+    description:
+      'TypeScript, Biome, and Playwright cover typing, formatting/linting, and browser-level regression checks.',
+    items: ['typescript', '@biomejs/biome', '@playwright/test'],
+  },
+];
+---
+
+<StoreLayout
+  title="About Shopedia"
+  description="Learn what Shopedia is, which storefront features it includes, and which libraries power the demo app."
+>
+  <main class="page-shell py-8 sm:py-10">
+    <div class="mx-auto max-w-5xl space-y-6">
+      <section class="surface-panel p-6 sm:p-8">
+        <p class="text-xs uppercase tracking-[0.24em] text-slate-400">About</p>
+        <h1 class="mt-3 text-3xl font-black tracking-tight text-slate-950">What Shopedia is built for</h1>
+        <p class="mt-3 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
+          Shopedia is demo marketplace UI playground built with Astro and Svelte islands. It is designed for browser automation practice and stores catalog, session, cart, and order data locally in IndexedDB.
+        </p>
+
+        <div class="mt-6 flex flex-wrap gap-3 border-b border-slate-200 pb-4" role="tablist" aria-label="About page tabs">
+          <a
+            href="/about"
+            role="tab"
+            aria-selected="true"
+            data-testid="about-tab-overview"
+            class={`${tabClasses} border border-slate-200 bg-white text-slate-600 hover:border-shopedia-200 hover:text-shopedia-700`}
+          >
+            Overview
+          </a>
+          <a
+            href="/about?tab=libraries"
+            role="tab"
+            aria-selected="false"
+            data-testid="about-tab-libraries"
+            class={`${tabClasses} border border-slate-200 bg-white text-slate-600 hover:border-shopedia-200 hover:text-shopedia-700`}
+          >
+            Libraries
+          </a>
+        </div>
+
+        <div id="overview" class="mt-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] scroll-mt-24" data-testid="about-panel-overview">
+          <section class="space-y-5">
+            <div>
+              <h2 class="text-xl font-black tracking-tight text-slate-950">What this app is about</h2>
+              <p class="mt-3 text-sm leading-7 text-slate-600">
+                This app models small storefront with realistic shopping flows while keeping everything local-first. Astro renders shell and routes, Svelte handles interactive UI, MSW mocks storefront API calls, and Dexie writes data into IndexedDB so flows stay persistent across refreshes.
+              </p>
+            </div>
+
+            <div>
+              <h2 class="text-xl font-black tracking-tight text-slate-950">What you can test here</h2>
+              <ul class="mt-4 grid gap-3 text-sm text-slate-600 sm:grid-cols-2">
+                <li class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">Seeded demo catalog with product detail pages</li>
+                <li class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">Search with paginated landing page loading</li>
+                <li class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">Login and registration demo flows</li>
+                <li class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">Persistent cart state and add-to-cart toasts</li>
+                <li class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">Cash checkout and per-account purchase history</li>
+                <li class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">Database reset and reseed controls for repeatable testing</li>
+              </ul>
+            </div>
+          </section>
+
+          <aside class="rounded-[2rem] border border-shopedia-100 bg-shopedia-50/80 p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-shopedia-700">Architecture snapshot</p>
+            <ul class="mt-4 space-y-3 text-sm leading-7 text-slate-700">
+              <li><span class="font-semibold text-slate-950">UI:</span> Astro pages and Svelte islands</li>
+              <li><span class="font-semibold text-slate-950">Data flow:</span> <code class="rounded bg-white px-2 py-1 text-xs text-shopedia-700">apiFetch()</code> → <code class="rounded bg-white px-2 py-1 text-xs text-shopedia-700">/api/*</code> → MSW handlers → Dexie → IndexedDB</li>
+              <li><span class="font-semibold text-slate-950">Persistence:</span> browser-local session, cart, and order data</li>
+              <li><span class="font-semibold text-slate-950">Automation focus:</span> stable selectors and repeatable seeded flows</li>
+            </ul>
+          </aside>
+        </div>
+
+        <div id="libraries" class="mt-10 space-y-4 scroll-mt-24" data-testid="about-panel-libraries" hidden>
+          <div class="max-w-3xl text-sm leading-7 text-slate-600">
+            Shopedia uses small modern stack focused on fast local development, browser-side persistence, and UI automation coverage.
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {libraryGroups.map((group) => (
+              <section class="rounded-[1.75rem] border border-slate-200 bg-slate-50/80 p-5">
+                <p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">{group.title}</p>
+                <p class="mt-3 text-sm leading-7 text-slate-600">{group.description}</p>
+                <ul class="mt-4 flex flex-wrap gap-2 text-sm font-semibold text-slate-800">
+                  {group.items.map((item) => (
+                    <li class="rounded-full border border-slate-200 bg-white px-3 py-1.5">{item}</li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</StoreLayout>
+
+<script>
+  const aboutOverviewTab = document.querySelector('[data-testid="about-tab-overview"]');
+  const aboutLibrariesTab = document.querySelector('[data-testid="about-tab-libraries"]');
+  const aboutOverviewPanel = document.querySelector('[data-testid="about-panel-overview"]');
+  const aboutLibrariesPanel = document.querySelector('[data-testid="about-panel-libraries"]');
+
+  if (
+    aboutOverviewTab instanceof HTMLAnchorElement &&
+    aboutLibrariesTab instanceof HTMLAnchorElement &&
+    aboutOverviewPanel instanceof HTMLDivElement &&
+    aboutLibrariesPanel instanceof HTMLDivElement
+  ) {
+    const activeTab = new URL(window.location.href).searchParams.get('tab') === 'libraries'
+      ? 'libraries'
+      : 'overview';
+
+    const isOverviewActive = activeTab === 'overview';
+
+    aboutOverviewTab.setAttribute('aria-selected', String(isOverviewActive));
+    aboutLibrariesTab.setAttribute('aria-selected', String(!isOverviewActive));
+    aboutOverviewPanel.hidden = !isOverviewActive;
+    aboutLibrariesPanel.hidden = isOverviewActive;
+
+    const activeClasses = ['bg-shopedia-600', 'text-white', 'shadow-sm'];
+    const inactiveClasses = ['border', 'border-slate-200', 'bg-white', 'text-slate-600'];
+
+    for (const className of activeClasses) {
+      aboutOverviewTab.classList.toggle(className, isOverviewActive);
+      aboutLibrariesTab.classList.toggle(className, !isOverviewActive);
+    }
+
+    for (const className of inactiveClasses) {
+      aboutOverviewTab.classList.toggle(className, !isOverviewActive);
+      aboutLibrariesTab.classList.toggle(className, isOverviewActive);
+    }
+  }
+</script>

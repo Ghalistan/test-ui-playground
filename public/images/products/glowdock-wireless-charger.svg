@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="GlowDock Wireless Charger illustration">
+  <rect width="1200" height="900" fill="#faf5ff" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#f3e8ff" />
+  <circle cx="600" cy="380" r="164" fill="#a855f7" opacity="0.12" />
+  <rect x="452" y="250" width="296" height="362" rx="48" fill="#1f2937" />
+  <rect x="488" y="288" width="224" height="286" rx="34" fill="#111827" />
+  <circle cx="600" cy="432" r="74" fill="none" stroke="#c084fc" stroke-width="26" />
+  <path d="M600 186v70" fill="none" stroke="#c084fc" stroke-width="22" stroke-linecap="round" />
+  <rect x="476" y="642" width="248" height="52" rx="26" fill="#581c87" opacity="0.18" />
+</svg>

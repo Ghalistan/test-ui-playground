@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="NovaBlend Portable Blender illustration">
+  <rect width="1200" height="900" fill="#fdf4ff" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#fae8ff" />
+  <rect x="470" y="170" width="260" height="420" rx="76" fill="#f5f3ff" stroke="#a855f7" stroke-width="26" />
+  <path d="M540 170h120v-38c0-28-20-48-46-48h-28c-26 0-46 20-46 48Z" fill="#7e22ce" />
+  <path d="M470 565h260v112c0 43-34 78-78 78H548c-43 0-78-35-78-78Z" fill="#7e22ce" />
+  <path d="M540 305c42-38 98-33 128 12 30 45 18 102-27 133-44 30-104 18-133-28-13-19-19-40-17-61" fill="none" stroke="#c084fc" stroke-width="26" stroke-linecap="round" />
+</svg>

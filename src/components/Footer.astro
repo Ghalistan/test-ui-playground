@@ -1,0 +1,13 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-slate-200 bg-white/80 py-8">
+  <div class="page-shell flex flex-col gap-3 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+    <p>© {year} Shopedia. Built as a persistent demo storefront for UI automation.</p>
+    <div class="flex flex-wrap items-center gap-4">
+      <a href="/about" class="hover:text-shopedia-700" data-testid="footer-about-link">About</a>
+      <a href="/settings" class="hover:text-shopedia-700">Settings</a>
+    </div>
+  </div>
+</footer>

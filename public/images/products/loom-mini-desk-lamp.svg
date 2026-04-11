@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Loom Mini Desk Lamp illustration">
+  <rect width="1200" height="900" fill="#fffbeb" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#fef3c7" />
+  <path d="M460 310c0-86 69-155 154-155h83c21 0 37 16 37 37v35c0 21-16 37-37 37h-83c-45 0-80 36-80 80v60h-74Z" fill="#a16207" />
+  <rect x="520" y="480" width="58" height="175" rx="28" fill="#1f2937" />
+  <rect x="410" y="655" width="290" height="62" rx="31" fill="#111827" />
+  <path d="M720 270 910 390 810 460 642 342" fill="#f59e0b" />
+  <circle cx="818" cy="410" r="70" fill="#fde68a" opacity="0.55" />
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Orbit Note Stand illustration">
+  <rect width="1200" height="900" fill="#eff6ff" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#dbeafe" />
+  <path d="M372 636 564 286h88L520 636Z" fill="#475569" />
+  <rect x="512" y="296" width="280" height="242" rx="28" fill="#f8fafc" stroke="#94a3b8" stroke-width="20" />
+  <path d="M792 538 640 636h164c34 0 54-39 34-67Z" fill="#94a3b8" />
+  <rect x="438" y="646" width="342" height="42" rx="21" fill="#334155" opacity="0.16" />
+  <line x1="560" y1="366" x2="724" y2="366" stroke="#cbd5e1" stroke-width="16" stroke-linecap="round" />
+  <line x1="560" y1="424" x2="704" y2="424" stroke="#cbd5e1" stroke-width="16" stroke-linecap="round" />
+</svg>

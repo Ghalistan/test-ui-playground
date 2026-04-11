@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Lumen Clip Reading Light illustration">
+  <rect width="1200" height="900" fill="#fffbeb" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#fef3c7" />
+  <path d="M486 638c0-86 40-170 112-226l58-46" fill="none" stroke="#475569" stroke-width="28" stroke-linecap="round" />
+  <path d="M656 366c0-53 44-97 98-97 54 0 98 44 98 97 0 51-42 94-93 97l-103 5Z" fill="#f59e0b" />
+  <rect x="398" y="612" width="158" height="86" rx="28" fill="#1e293b" />
+  <rect x="456" y="650" width="116" height="28" rx="14" fill="#f8fafc" opacity="0.75" />
+  <circle cx="742" cy="364" r="148" fill="#fde68a" opacity="0.35" />
+</svg>

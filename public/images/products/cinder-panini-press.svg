@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Cinder Panini Press illustration">
+  <rect width="1200" height="900" fill="#fff1f2" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#ffe4e6" />
+  <path d="M390 420c0-94 76-170 170-170h118c73 0 132 59 132 132 0 21-5 42-14 61l-52 113H458l-54-95c-9-17-14-36-14-55Z" fill="#ef4444" />
+  <rect x="432" y="528" width="336" height="144" rx="42" fill="#7f1d1d" />
+  <rect x="470" y="566" width="260" height="38" rx="19" fill="#fecaca" opacity="0.62" />
+  <circle cx="706" cy="390" r="18" fill="#fee2e2" />
+  <rect x="456" y="684" width="288" height="40" rx="20" fill="#7f1d1d" opacity="0.14" />
+</svg>

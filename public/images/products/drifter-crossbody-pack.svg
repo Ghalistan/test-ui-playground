@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Drifter Crossbody Pack illustration">
+  <rect width="1200" height="900" fill="#ecfeff" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#cffafe" />
+  <path d="M410 388c0-91 74-165 165-165h94c91 0 165 74 165 165v100c0 104-84 188-188 188h-48c-104 0-188-84-188-188Z" fill="#0f766e" />
+  <rect x="470" y="430" width="304" height="182" rx="58" fill="#134e4a" />
+  <rect x="520" y="478" width="204" height="30" rx="15" fill="#5eead4" opacity="0.8" />
+  <path d="M492 284c58-61 160-88 262-48 53 21 98 58 129 105" fill="none" stroke="#0f766e" stroke-width="26" stroke-linecap="round" />
+  <rect x="480" y="686" width="248" height="38" rx="19" fill="#0f172a" opacity="0.12" />
+</svg>

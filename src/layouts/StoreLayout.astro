@@ -1,0 +1,30 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  image?: string;
+  structuredData?: unknown | unknown[];
+}
+
+const {
+  title,
+  description,
+  noindex = false,
+  image,
+  structuredData,
+} = Astro.props;
+const searchQuery = Astro.url.searchParams.get('q') ?? '';
+---
+
+<BaseLayout title={title} description={description} noindex={noindex} image={image} structuredData={structuredData}>
+  <div class="min-h-screen bg-slate-50 text-slate-950">
+    <Header searchQuery={searchQuery} currentPath={Astro.url.pathname} />
+    <slot />
+    <Footer />
+  </div>
+</BaseLayout>

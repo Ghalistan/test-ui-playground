@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="SunMesh Beach Speaker illustration">
+  <rect width="1200" height="900" fill="#fefce8" />
+  <rect x="110" y="80" width="980" height="740" rx="72" fill="#fef3c7" />
+  <rect x="392" y="278" width="416" height="344" rx="86" fill="#0f766e" />
+  <rect x="436" y="320" width="328" height="260" rx="58" fill="#115e59" />
+  <g stroke="#5eead4" stroke-width="14" opacity="0.7">
+    <line x1="472" y1="340" x2="472" y2="560" />
+    <line x1="516" y1="340" x2="516" y2="560" />
+    <line x1="560" y1="340" x2="560" y2="560" />
+    <line x1="604" y1="340" x2="604" y2="560" />
+    <line x1="648" y1="340" x2="648" y2="560" />
+    <line x1="692" y1="340" x2="692" y2="560" />
+    <line x1="736" y1="340" x2="736" y2="560" />
+  </g>
+  <path d="M806 314c74-10 126 58 100 124" fill="none" stroke="#0f766e" stroke-width="24" stroke-linecap="round" />
+  <rect x="448" y="644" width="304" height="42" rx="21" fill="#134e4a" opacity="0.14" />
+</svg>

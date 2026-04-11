@@ -1,0 +1,17 @@
+{
+  "name": "Shopedia",
+  "short_name": "Shopedia",
+  "description": "Demo marketplace UI playground for persistent local e-commerce flows.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#16a34a",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ]
+}
