@@ -1,11 +1,12 @@
 ---
 import SettingsDangerZone from '../components/svelte/SettingsDangerZone.svelte';
+import SettingsProfileForm from '../components/svelte/SettingsProfileForm.svelte';
 import StoreLayout from '../layouts/StoreLayout.astro';
 ---
 
 <StoreLayout
   title="Settings | Shopedia"
-  description="Manage the local Shopedia demo state and reset the browser database when needed."
+  description="Manage your profile information and reset the browser database when needed."
   noindex
 >
   <main class="page-shell py-8 sm:py-10">
@@ -13,6 +14,10 @@ import StoreLayout from '../layouts/StoreLayout.astro';
       <p class="text-xs uppercase tracking-[0.24em] text-slate-400">Settings</p>
       <h1 class="text-3xl font-black tracking-tight text-slate-950">App settings</h1>
     </div>
-    <SettingsDangerZone client:load />
+
+    <div class="grid gap-6 lg:grid-cols-[1fr_0.85fr]">
+      <SettingsProfileForm client:load />
+      <SettingsDangerZone client:load />
+    </div>
   </main>
 </StoreLayout>

@@ -4,6 +4,7 @@ import { checkoutHandlers } from './checkout';
 import { orderHandlers } from './orders';
 import { productHandlers } from './products';
 import { settingsHandlers } from './settings';
+import { userHandlers } from './user';
 
 export const handlers = [
   ...authHandlers,
@@ -12,4 +13,5 @@ export const handlers = [
   ...checkoutHandlers,
   ...orderHandlers,
   ...settingsHandlers,
+  ...userHandlers,
 ];

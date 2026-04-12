@@ -1,6 +1,6 @@
 import type { Product, User } from '../types';
 
-export const SEED_VERSION = '2026-04-11-shopedia-v3';
+export const SEED_VERSION = '2026-04-11-shopedia-v4';
 
 export const seedProducts: Product[] = [
   {
@@ -265,7 +265,7 @@ export const seedCustomer: User = {
   id: 'user-seed-customer',
   firstName: 'Mira',
   lastName: 'Tan',
-  nickname: 'mira',
+  nickname: 'mira_tan',
   email: 'customer@gghgh.dev',
   password: 'password123',
   role: 'customer',
