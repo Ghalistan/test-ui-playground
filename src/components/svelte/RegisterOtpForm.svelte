@@ -141,8 +141,13 @@ async function handleSubmit(event: SubmitEvent) {
     </div>
 
     <div class="space-y-3">
-      <label class="text-sm font-semibold text-slate-700">OTP code</label>
-      <div class="flex justify-center gap-2 sm:gap-3" data-testid="otp-code">
+      <span id="otp-code-label" class="text-sm font-semibold text-slate-700">OTP code</span>
+      <div
+        class="flex justify-center gap-2 sm:gap-3"
+        data-testid="otp-code"
+        role="group"
+        aria-labelledby="otp-code-label"
+      >
         {#each otpDigits as digit, index}
           <input
             bind:this={inputRefs[index]}

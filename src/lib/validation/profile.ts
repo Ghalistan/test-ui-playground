@@ -1,5 +1,3 @@
-import type { SessionUser } from '../types';
-
 export interface ProfileUpdatePayload {
   firstName: string;
   lastName: string;
