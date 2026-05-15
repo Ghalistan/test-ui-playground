@@ -1,14 +1,15 @@
-import { delay, HttpResponse, http } from 'msw';
+import { http } from 'msw';
 
+import { REQUEST_DELAY_MS } from '../../lib/constants';
 import {
   getSessionUser,
   login,
   logout,
   requestRegistrationOtp,
   verifyRegistrationOtp,
-} from '../../lib/db/operations';
+} from '../../lib/db/auth';
 import type { LoginPayload, RegisterPayload } from '../../lib/types';
-import { jsonErrorResponse, readJsonBody } from './shared';
+import { readJsonBody, withJsonHandler } from './shared';
 
 interface VerifyRegistrationOtpBody {
   email?: string;
@@ -16,56 +17,61 @@ interface VerifyRegistrationOtpBody {
 }
 
 export const authHandlers = [
-  http.get('/api/session', async () => {
-    await delay(120);
-    return HttpResponse.json({ data: { user: await getSessionUser() } });
+  http.get('/api/session', () => {
+    return withJsonHandler(() => getSessionUser().then((user) => ({ user })), {
+      delayMs: REQUEST_DELAY_MS.default,
+    });
   }),
 
   http.post('/api/auth/register/request-otp', async ({ request }) => {
-    await delay(180);
-
-    try {
-      const payload = await readJsonBody<RegisterPayload>(request);
-      const data = await requestRegistrationOtp(payload);
-      return HttpResponse.json({ data }, { status: 201 });
-    } catch (error) {
-      return jsonErrorResponse(error, 'The request could not be completed.');
-    }
+    return withJsonHandler(
+      async () => {
+        const payload = await readJsonBody<RegisterPayload>(request);
+        const data = await requestRegistrationOtp(payload);
+        return data;
+      },
+      {
+        delayMs: REQUEST_DELAY_MS.reset,
+        successStatus: 201,
+      },
+    );
   }),
 
   http.post('/api/auth/register/verify-otp', async ({ request }) => {
-    await delay(160);
-
-    try {
-      const payload = await readJsonBody<VerifyRegistrationOtpBody>(request);
-      const data = await verifyRegistrationOtp(
-        payload.email ?? '',
-        payload.otp ?? '',
-      );
-      return HttpResponse.json({ data: { user: data } }, { status: 201 });
-    } catch (error) {
-      return jsonErrorResponse(error, 'The request could not be completed.');
-    }
+    return withJsonHandler(
+      async () => {
+        const payload = await readJsonBody<VerifyRegistrationOtpBody>(request);
+        const data = await verifyRegistrationOtp(
+          payload.email ?? '',
+          payload.otp ?? '',
+        );
+        return { user: data };
+      },
+      {
+        delayMs: REQUEST_DELAY_MS.auth,
+        successStatus: 201,
+      },
+    );
   }),
 
   http.post('/api/auth/login', async ({ request }) => {
-    await delay(160);
-
-    try {
-      const payload = await readJsonBody<LoginPayload>(request);
-      const data = await login(payload);
-      return HttpResponse.json({ data: { user: data } });
-    } catch (error) {
-      return jsonErrorResponse(
-        error,
-        'The request could not be completed.',
-        401,
-      );
-    }
+    return withJsonHandler(
+      async () => {
+        const payload = await readJsonBody<LoginPayload>(request);
+        const data = await login(payload);
+        return { user: data };
+      },
+      {
+        delayMs: REQUEST_DELAY_MS.auth,
+        errorStatus: 401,
+        errorFallback: 'The request could not be completed.',
+      },
+    );
   }),
 
-  http.post('/api/auth/logout', async () => {
-    await delay(100);
-    return HttpResponse.json({ data: await logout() });
+  http.post('/api/auth/logout', () => {
+    return withJsonHandler(() => logout(), {
+      delayMs: REQUEST_DELAY_MS.quick,
+    });
   }),
 ];

@@ -1,19 +1,22 @@
-import { delay, HttpResponse, http } from 'msw';
+import { http } from 'msw';
 
-import { updateUserProfile } from '../../lib/db/operations';
+import { REQUEST_DELAY_MS } from '../../lib/constants';
+import { updateUserProfile } from '../../lib/db/profile';
 import type { ProfileUpdatePayload } from '../../lib/validation/profile';
-import { jsonErrorResponse, readJsonBody } from './shared';
+import { readJsonBody, withJsonHandler } from './shared';
 
 export const userHandlers = [
   http.put('/api/user/profile', async ({ request }) => {
-    await delay(160);
-
-    try {
-      const payload = await readJsonBody<ProfileUpdatePayload>(request);
-      const user = await updateUserProfile(payload);
-      return HttpResponse.json({ data: { user } }, { status: 200 });
-    } catch (error) {
-      return jsonErrorResponse(error, 'The profile could not be updated.');
-    }
+    return withJsonHandler(
+      async () => {
+        const payload = await readJsonBody<ProfileUpdatePayload>(request);
+        const user = await updateUserProfile(payload);
+        return { user };
+      },
+      {
+        delayMs: REQUEST_DELAY_MS.auth,
+        errorFallback: 'The profile could not be updated.',
+      },
+    );
   }),
 ];
