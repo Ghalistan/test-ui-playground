@@ -1,4 +1,5 @@
 import type { RegisterPayload } from '../types';
+import { validateNickname } from './shared';
 
 export interface RegistrationFieldErrors {
   fullName?: string;
@@ -8,7 +9,6 @@ export interface RegistrationFieldErrors {
   passwordConfirmation?: string;
 }
 
-const NICKNAME_PATTERN = /^[A-Za-z0-9._#-]+$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function validateRegistrationFields(
@@ -19,7 +19,6 @@ export function validateRegistrationFields(
 ): RegistrationFieldErrors {
   const errors: RegistrationFieldErrors = {};
   const fullName = payload.fullName?.trim() ?? '';
-  const nickname = payload.nickname?.trim() ?? '';
   const email = payload.email?.trim() ?? '';
   const password = payload.password ?? '';
   const passwordConfirmation = payload.passwordConfirmation ?? '';
@@ -28,11 +27,9 @@ export function validateRegistrationFields(
     errors.fullName = 'Full name is required.';
   }
 
-  if (!nickname) {
-    errors.nickname = 'Nickname is required.';
-  } else if (nickname.length < 5 || !NICKNAME_PATTERN.test(nickname)) {
-    errors.nickname =
-      'Nickname must be at least 5 characters and can only use letters, numbers, ., -, _, or #.';
+  const nicknameError = validateNickname(payload.nickname ?? '', true);
+  if (nicknameError) {
+    errors.nickname = nicknameError;
   }
 
   if (!email) {

@@ -1,3 +1,5 @@
+import { validateNickname } from './shared';
+
 export interface ProfileUpdatePayload {
   firstName: string;
   lastName: string;
@@ -18,15 +20,12 @@ export interface ProfileFieldErrors {
   postalCode?: string;
 }
 
-const NICKNAME_PATTERN = /^[A-Za-z0-9._#-]+$/;
-
 export function validateProfileUpdateFields(
   payload: ProfileUpdatePayload,
 ): ProfileFieldErrors {
   const errors: ProfileFieldErrors = {};
   const firstName = payload.firstName?.trim() ?? '';
   const lastName = payload.lastName?.trim() ?? '';
-  const nickname = payload.nickname?.trim() ?? '';
 
   if (!firstName) {
     errors.firstName = 'First name is required.';
@@ -36,11 +35,9 @@ export function validateProfileUpdateFields(
     errors.lastName = 'Last name is required.';
   }
 
-  if (!nickname) {
-    errors.nickname = 'Nickname is required.';
-  } else if (nickname.length < 5 || !NICKNAME_PATTERN.test(nickname)) {
-    errors.nickname =
-      'Nickname must be at least 5 characters and can only use letters, numbers, ., -, _, or #.';
+  const nicknameError = validateNickname(payload.nickname ?? '', true);
+  if (nicknameError) {
+    errors.nickname = nicknameError;
   }
 
   return errors;
