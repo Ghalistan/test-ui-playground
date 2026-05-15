@@ -16,6 +16,7 @@
     "lint:fix": "biome lint --write .",
     "format": "biome format --write .",
     "test:e2e": "playwright test",
+    "test": "bun test tests/",
     "astro": "astro"
   },
   "dependencies": {

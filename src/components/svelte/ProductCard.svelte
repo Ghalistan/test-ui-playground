@@ -2,8 +2,7 @@
 import LoaderCircle from 'lucide-svelte/icons/loader-circle';
 import Plus from 'lucide-svelte/icons/plus';
 import ShoppingCart from 'lucide-svelte/icons/shopping-cart';
-import { apiFetch } from '../../lib/api/client';
-import { refreshCartCount, showToast } from '../../lib/stores/app';
+import { addToCart } from '../../lib/cart/actions';
 import type { Product } from '../../lib/types';
 import { formatCurrency } from '../../lib/utils';
 
@@ -19,13 +18,7 @@ async function handleAddToCart() {
   errorState = false;
 
   try {
-    await apiFetch('/api/cart/items', {
-      method: 'POST',
-      body: JSON.stringify({ productId: product.id, quantity: 1 }),
-    });
-
-    await refreshCartCount();
-    showToast(`${product.name} added to cart.`);
+    await addToCart(product.id, product.name);
   } catch (error) {
     feedback =
       error instanceof Error

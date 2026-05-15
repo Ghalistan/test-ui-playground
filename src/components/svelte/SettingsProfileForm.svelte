@@ -2,6 +2,10 @@
 import { onMount } from 'svelte';
 
 import { apiFetch } from '../../lib/api/client';
+import {
+  formValuesToPayload,
+  sessionToFormValues,
+} from '../../lib/profile/helpers';
 import { showToast, syncChromeState } from '../../lib/stores/app';
 import type { SessionResponse, SessionUser } from '../../lib/types';
 import { createInitials } from '../../lib/utils';
@@ -48,25 +52,17 @@ async function loadSession() {
     const session = await apiFetch<SessionResponse>('/api/session');
     sessionUser = session.user;
     if (sessionUser) {
-      firstName = sessionUser.firstName;
-      lastName = sessionUser.lastName;
-      nickname = sessionUser.nickname;
+      const values = sessionToFormValues(sessionUser);
+      firstName = values.firstName;
+      lastName = values.lastName;
+      nickname = values.nickname;
       email = sessionUser.email;
-      addressLine1 = sessionUser.addressLine1 ?? '';
-      city = sessionUser.city ?? '';
-      country = sessionUser.country ?? '';
-      postalCode = sessionUser.postalCode ?? '';
+      addressLine1 = values.addressLine1;
+      city = values.city;
+      country = values.country;
+      postalCode = values.postalCode;
 
-      // Store original values for cancel
-      originalValues = {
-        firstName,
-        lastName,
-        nickname,
-        addressLine1,
-        city,
-        country,
-        postalCode,
-      };
+      originalValues = { ...values };
     }
     errorMessage = '';
   } catch (error) {
@@ -84,7 +80,6 @@ function startEditing() {
 }
 
 function cancelEditing() {
-  // Revert to original values
   firstName = originalValues.firstName;
   lastName = originalValues.lastName;
   nickname = originalValues.nickname;
@@ -96,6 +91,18 @@ function cancelEditing() {
   editing = false;
   fieldErrors = {};
   errorMessage = '';
+}
+
+function buildProfilePayload() {
+  return formValuesToPayload({
+    firstName,
+    lastName,
+    nickname,
+    addressLine1,
+    city,
+    country,
+    postalCode,
+  });
 }
 
 async function handleSave() {
@@ -119,18 +126,9 @@ async function handleSave() {
   try {
     await apiFetch('/api/user/profile', {
       method: 'PUT',
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        nickname,
-        addressLine1,
-        city,
-        country,
-        postalCode,
-      }),
+      body: JSON.stringify(buildProfilePayload()),
     });
 
-    // Update original values to new saved values
     originalValues = {
       firstName,
       lastName,

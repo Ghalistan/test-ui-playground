@@ -1,6 +1,12 @@
 <script lang="ts">
 import { onMount } from 'svelte';
 
+import {
+  formatPriceInput,
+  parsePositiveInteger,
+  sanitizePriceInput,
+} from '../../lib/pricing';
+import { readSearchParams, syncSearchParamsToUrl } from '../../lib/url-sync';
 import { formatCurrency } from '../../lib/utils';
 import ProductGrid from './ProductGrid.svelte';
 
@@ -17,57 +23,12 @@ let committedMinPrice: number | null = initialMinPrice;
 let committedMaxPrice: number | null = initialMaxPrice;
 let mounted = false;
 
-function parseOptionalPrice(value: string | null) {
-  if (!value) {
-    return null;
-  }
-
-  const parsedValue = Number.parseInt(value, 10);
-  return Number.isFinite(parsedValue) ? parsedValue : null;
-}
-
-function syncStateFromUrl() {
-  const url = new URL(window.location.href);
-  searchQuery = url.searchParams.get('q') ?? '';
-  committedMinPrice = parseOptionalPrice(url.searchParams.get('minPrice'));
-  committedMaxPrice = parseOptionalPrice(url.searchParams.get('maxPrice'));
+function applySearchParams(params: ReturnType<typeof readSearchParams>) {
+  searchQuery = params.query;
+  committedMinPrice = params.minPrice;
+  committedMaxPrice = params.maxPrice;
   minPriceInput = formatPriceInput(committedMinPrice);
   maxPriceInput = formatPriceInput(committedMaxPrice);
-}
-
-function formatPriceInput(value: number | null) {
-  if (value === null || value <= 0) {
-    return '';
-  }
-
-  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
-
-function sanitizePriceInput(value: string) {
-  const digitsOnly = value.replace(/\D/g, '');
-  const normalizedDigits = digitsOnly.replace(/^0+(?=\d)/, '');
-
-  if (!normalizedDigits) {
-    return '';
-  }
-
-  return normalizedDigits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
-
-function parsePositiveInteger(value: string) {
-  const digitsOnly = value.replace(/\D/g, '');
-
-  if (!digitsOnly) {
-    return null;
-  }
-
-  const parsedValue = Number.parseInt(digitsOnly, 10);
-
-  if (!Number.isFinite(parsedValue) || parsedValue <= 0) {
-    return null;
-  }
-
-  return parsedValue;
 }
 
 function handleMinPriceInput(event: Event) {
@@ -139,41 +100,10 @@ function clearPriceFilter() {
   maxPriceInput = '';
 }
 
-function syncUrl(
-  searchQuery: string,
-  minPrice: number | null,
-  maxPrice: number | null,
-) {
-  const url = new URL(window.location.href);
-
-  if (searchQuery.trim()) {
-    url.searchParams.set('q', searchQuery.trim());
-  } else {
-    url.searchParams.delete('q');
-  }
-
-  if (minPrice !== null) {
-    url.searchParams.set('minPrice', String(minPrice));
-  } else {
-    url.searchParams.delete('minPrice');
-  }
-
-  if (maxPrice !== null) {
-    url.searchParams.set('maxPrice', String(maxPrice));
-  } else {
-    url.searchParams.delete('maxPrice');
-  }
-
-  const nextSearch = url.searchParams.toString();
-  const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash}`;
-
-  window.history.replaceState(window.history.state, '', nextUrl);
-}
-
 onMount(() => {
-  syncStateFromUrl();
+  applySearchParams(readSearchParams());
   mounted = true;
-  syncUrl(searchQuery, committedMinPrice, committedMaxPrice);
+  syncSearchParamsToUrl(searchQuery, committedMinPrice, committedMaxPrice);
 });
 
 $: hasSearchQuery = Boolean(searchQuery.trim());
@@ -181,7 +111,7 @@ $: hasAvailablePriceRange =
   availableMinPrice !== null && availableMaxPrice !== null;
 
 $: if (mounted) {
-  syncUrl(searchQuery, committedMinPrice, committedMaxPrice);
+  syncSearchParamsToUrl(searchQuery, committedMinPrice, committedMaxPrice);
 }
 </script>
 

@@ -1,19 +1,23 @@
-import { delay, HttpResponse, http } from 'msw';
+import { http } from 'msw';
 
-import { checkoutCash } from '../../lib/db/operations';
+import { REQUEST_DELAY_MS } from '../../lib/constants';
+import { checkoutCash } from '../../lib/db/checkout';
 import type { CheckoutPayload } from '../../lib/types';
-import { jsonErrorResponse, readJsonBody } from './shared';
+import { readJsonBody, withJsonHandler } from './shared';
 
 export const checkoutHandlers = [
   http.post('/api/checkout/cash', async ({ request }) => {
-    await delay(220);
-
-    try {
-      const payload = await readJsonBody<CheckoutPayload>(request);
-      const data = await checkoutCash(payload);
-      return HttpResponse.json({ data }, { status: 201 });
-    } catch (error) {
-      return jsonErrorResponse(error, 'Checkout failed.', 401);
-    }
+    return withJsonHandler(
+      async () => {
+        const payload = await readJsonBody<CheckoutPayload>(request);
+        return checkoutCash(payload);
+      },
+      {
+        delayMs: REQUEST_DELAY_MS.checkout,
+        successStatus: 201,
+        errorFallback: 'Checkout failed.',
+        errorStatus: 401,
+      },
+    );
   }),
 ];
