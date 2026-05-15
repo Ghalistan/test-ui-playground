@@ -2,6 +2,10 @@
 import { onMount } from 'svelte';
 
 import { apiFetch } from '../../lib/api/client';
+import {
+  getCheckoutLoginTarget,
+  parseCheckoutParams,
+} from '../../lib/checkout/helpers';
 import { refreshCartCount, refreshSession } from '../../lib/stores/app';
 import type { CartSnapshot, Product, SessionResponse } from '../../lib/types';
 import { formatCurrency } from '../../lib/utils';
@@ -23,10 +27,7 @@ let city = '';
 let country = '';
 let postalCode = '';
 
-$: loginTarget =
-  mode === 'instant' && productId
-    ? `/login?next=${encodeURIComponent(`/checkout?mode=instant&productId=${productId}&qty=${quantity}`)}`
-    : '/login?next=%2Fcheckout';
+$: loginTarget = getCheckoutLoginTarget(mode, productId, quantity);
 
 async function loadCheckoutState() {
   loading = true;
@@ -102,12 +103,10 @@ async function handleSubmit(event: SubmitEvent) {
 }
 
 onMount(() => {
-  const url = new URL(window.location.href);
-  mode = url.searchParams.get('mode') === 'instant' ? 'instant' : 'cart';
-  productId = url.searchParams.get('productId');
-
-  const quantityParam = Number.parseInt(url.searchParams.get('qty') ?? '1', 10);
-  quantity = Number.isNaN(quantityParam) ? 1 : Math.max(1, quantityParam);
+  const params = parseCheckoutParams();
+  mode = params.mode;
+  productId = params.productId;
+  quantity = params.quantity;
 
   mounted = true;
   void loadCheckoutState();
