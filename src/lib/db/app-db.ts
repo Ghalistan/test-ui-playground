@@ -1,5 +1,6 @@
 import Dexie, { type Table } from 'dexie';
 
+import { DB_NAME } from '../constants';
 import type {
   CartItem,
   MetaRecord,
@@ -22,7 +23,7 @@ class ShopediaDatabase extends Dexie {
   pendingRegistrations!: Table<PendingRegistration, PendingRegistration['id']>;
 
   constructor() {
-    super('shopedia-demo-db');
+    super(DB_NAME);
 
     this.version(1).stores({
       meta: 'key',

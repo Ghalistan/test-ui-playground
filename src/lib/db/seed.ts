@@ -1,3 +1,4 @@
+import { DEFAULT_AVATAR_PATH } from '../constants';
 import type { Product, User } from '../types';
 
 export const SEED_VERSION = '2026-04-11-shopedia-v4';
@@ -269,7 +270,7 @@ export const seedCustomer: User = {
   email: 'customer@gghgh.dev',
   password: 'password123',
   role: 'customer',
-  profileImageUrl: '/images/avatars/default-avatar.svg',
+  profileImageUrl: DEFAULT_AVATAR_PATH,
   addressLine1: '221B Market Street',
   city: 'Singapore',
   country: 'Singapore',
