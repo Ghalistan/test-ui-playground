@@ -22,6 +22,12 @@ export default defineConfig({
         ...devices['Pixel 7'],
       },
     },
+    {
+      name: 'desktop-firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+      },
+    },
   ],
   webServer: {
     command: 'bun run dev',

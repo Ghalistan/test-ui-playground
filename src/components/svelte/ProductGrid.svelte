@@ -156,7 +156,8 @@ onMount(() => {
   activeMaxPrice = maxPrice;
 
   observer = new IntersectionObserver(
-    ([entry]) => {
+    (entries) => {
+      const entry = Array.isArray(entries) ? entries[0] : undefined;
       sentinelVisible = entry?.isIntersecting ?? false;
     },
     {
